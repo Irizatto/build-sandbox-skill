@@ -1,0 +1,5 @@
+interface:
+  display_name: "竞技规则沙盒构建器"
+  short_description: "构建选禁、阵容、版本与克制关系驱动的竞技规则模拟世界"
+  default_prompt: "Use $build-persistent-sandbox with $build-competitive-rules-sandbox to build a versioned competitive sandbox with legal drafting and conditional matchup logic."
+

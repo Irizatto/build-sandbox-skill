@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/domain_profile.schema.json",
+  "title": "Persistent Sandbox Domain Profile",
+  "type": "object",
+  "required": ["domain_id", "domain_version", "allowed_vocabulary", "forbidden_vocabulary", "actor_types", "organization_types", "mechanic_families", "time_model", "core_loops", "crossover_policy"],
+  "properties": {
+    "domain_id": {"type": "string", "minLength": 1},
+    "domain_version": {"type": "string", "minLength": 1},
+    "allowed_vocabulary": {"type": "array", "items": {"type": "string"}},
+    "forbidden_vocabulary": {"type": "array", "items": {"type": "string"}},
+    "actor_types": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "organization_types": {"type": "array", "items": {"type": "string"}},
+    "mechanic_families": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "time_model": {"type": "object"},
+    "core_loops": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "secondary_domains": {"type": "array", "items": {"type": "string"}},
+    "crossover_policy": {"enum": ["forbidden", "explicit_only", "enabled"]}
+  },
+  "additionalProperties": true
+}
+

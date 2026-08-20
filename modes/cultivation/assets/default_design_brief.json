@@ -1,0 +1,32 @@
+{
+  "project_type": "cultivation_open_world_sandbox",
+  "release_label": "World Alpha",
+  "core_principles": [
+    "dense world, sparse context",
+    "world truth is separate from belief and player knowledge",
+    "existing canon and stable IDs are preserved",
+    "NPCs live, fail and die without the player",
+    "cultivation realms are regional interpretations",
+    "advantages require causes, costs and counterplay"
+  ],
+  "default_scale": {
+    "macroregions": 8,
+    "polities": 5,
+    "major_factions": 16,
+    "formal_npcs": 120,
+    "detail_tiers": {"A": 24, "B": 48, "C": 48}
+  },
+  "context": {
+    "world_info_cap_tokens": 8000,
+    "ordinary_active_cast": [4, 10],
+    "meeting_active_cast": [10, 16],
+    "absolute_actor_cap": 20
+  },
+  "simulation": {
+    "ticks": ["annual", "five_year", "ten_year"],
+    "test_years": [50, 100, 300],
+    "multi_seed": true,
+    "permanent_death": true,
+    "id_retention_after_death": true
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "持久世界模拟内核"
+  short_description: "构建可验证、可持久化并适配上下文预算的复杂世界系统"
+  default_prompt: "Use $build-persistent-sandbox to build a domain-isolated persistent sandbox with executable rules and validation."

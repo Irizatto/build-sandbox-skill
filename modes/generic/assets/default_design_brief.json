@@ -1,0 +1,30 @@
+{
+  "project_type": "persistent_sandbox",
+  "release_label": "Alpha",
+  "primary_domain": "UNSET",
+  "secondary_domains": [],
+  "core_principles": [
+    "domain-specific content is isolated from the generic core",
+    "world truth is separate from belief and viewer knowledge",
+    "consequential mechanics use versioned state-machine contracts",
+    "important generated content receives a stable ID",
+    "committed outcomes survive save and reload",
+    "advantages have causes, costs, uncertainty and counterplay",
+    "dense world uses sparse viewer-specific context"
+  ],
+  "context": {
+    "baseline_context_tokens": 32768,
+    "reserved_output_tokens": 4096,
+    "world_info_budget_tokens": 8000,
+    "measure_final_assembled_prompt": true
+  },
+  "validation": {
+    "strict_schema": true,
+    "explicit_references": true,
+    "mutation_tests": true,
+    "deterministic_replay": true,
+    "save_reload_equivalence": true,
+    "human_long_session_gate": true
+  }
+}
+

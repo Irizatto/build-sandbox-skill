@@ -1,0 +1,40 @@
+{
+  "domain_id": "competitive_rules",
+  "domain_version": "1.0.0",
+  "allowed_vocabulary": [
+    "competitor",
+    "player",
+    "coach",
+    "team",
+    "league",
+    "tournament",
+    "roster",
+    "role",
+    "ruleset",
+    "patch",
+    "draft",
+    "selection",
+    "ban",
+    "lineup",
+    "matchup",
+    "season"
+  ],
+  "forbidden_vocabulary": [
+    "宗门",
+    "修炼境界",
+    "灵石",
+    "功法",
+    "渡劫",
+    "sect",
+    "cultivation realm",
+    "spiritual stone"
+  ],
+  "actor_types": ["competitor", "player", "coach", "analyst", "manager", "official"],
+  "organization_types": ["team", "league", "tournament organizer", "governing body", "broadcast organization"],
+  "mechanic_families": ["draft", "lineup", "match", "series", "tournament", "roster", "ranking", "metagame"],
+  "time_model": {"units": ["phase", "game", "series", "stage", "season"], "version_pinned": true},
+  "core_loops": ["prepare", "select", "compete", "review", "adapt"],
+  "secondary_domains": [],
+  "crossover_policy": "forbidden"
+}
+

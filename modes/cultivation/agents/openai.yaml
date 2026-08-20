@@ -1,0 +1,4 @@
+interface:
+  display_name: "修仙开放世界构建器"
+  short_description: "从零构建可长期模拟并适配酒馆的修仙开放世界剧本系统"
+  default_prompt: "Use $build-cultivation-sandbox to build a dense-world, sparse-context cultivation sandbox from zero."

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/mechanic_contract.schema.json",
+  "title": "Persistent Sandbox Mechanic Contract",
+  "type": "object",
+  "required": ["stable_id", "version", "domain_id", "state_schema", "initial_state", "participants", "phases", "actions", "invariants", "terminal_conditions", "visibility", "tests"],
+  "properties": {
+    "stable_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "domain_id": {"type": "string", "minLength": 1},
+    "state_schema": {"type": "object"},
+    "initial_state": {"type": "object"},
+    "participants": {"type": "array", "minItems": 1},
+    "phases": {"type": "array", "minItems": 1},
+    "actions": {"type": "array", "minItems": 1},
+    "resolution_priority": {"type": "array"},
+    "randomness": {"type": "object"},
+    "counters": {"type": "array"},
+    "invariants": {"type": "array", "minItems": 1},
+    "terminal_conditions": {"type": "array", "minItems": 1},
+    "visibility": {"type": "object"},
+    "tests": {"type": "array", "minItems": 1}
+  },
+  "additionalProperties": true
+}

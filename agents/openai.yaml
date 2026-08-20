@@ -1,0 +1,4 @@
+interface:
+  display_name: "持久沙盒构建器"
+  short_description: "一个入口，三种形式：通用持久世界、竞技规则、修仙开放世界"
+  default_prompt: "Use $build-sandbox and select exactly one form: generic, competitive, or cultivation. Build a persistent, executable, validated sandbox."
