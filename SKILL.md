@@ -1,6 +1,6 @@
 ---
 name: build-sandbox
-description: Build, expand, migrate, validate, and package persistent sandboxes in generic, competitive, or cultivation form. Use for executable world/state systems, living-world expansion, deterministic materialization, organization ecology, persistent character life, relationship/narrative runtime, long-session gameplay review, and SillyTavern/world-simulation packaging. Use one primary mode per build unless the user explicitly requests a crossover.
+description: Build, expand, migrate, validate, and package persistent sandboxes in generic, competitive, or cultivation form. Use for executable world/state systems, living-world expansion, deterministic materialization, organization ecology, persistent character life, relationship/narrative runtime, token-safe lived-world experience, long-session gameplay review, and SillyTavern/world-simulation packaging. Use one primary mode per build unless the user explicitly requests a crossover.
 ---
 
 # Build Sandbox
@@ -54,6 +54,7 @@ Read:
 - `references/living-sandbox-lifecycle.md` — six gated phases from horizon/topology through long-session hardening.
 - `references/world-growth-and-materialization.md` — macro skeletons, latent seeds, deterministic materialization, organization seeds, actor promotion, Canon persistence.
 - `references/character-life-relationship-narrative.md` — private/everyday life, actor promotion, multidimensional relationships, Character Anchors, NPC initiative, causal Story Beat runtime, reusable roleplay-card design patterns.
+- `references/lived-world-token-safe-experience.md` — ordinary life, embodiment, material culture, social grammar, information ecology, player-created legacy, discovery, social friction, world scars and belonging without prompt growth scaling with world size.
 - `references/gameplay-review-and-validation.md` — periodic gameplay review, 3h/20h/100h thinking, long-session scenario suite, anti-pattern and release gates.
 - `references/orchestration-and-handoffs.md` — multi-agent execution, Orca/Muse Spark Contributor/Codex role split, workspace policy, no-human-router handoffs.
 
@@ -71,6 +72,27 @@ For a mature open-ended sandbox, assess these six phases even when some are alre
 6. **Long-Session Gameplay Hardening** — mundane life, recurring actors, absence, long skips, anti-protagonist play, weird actions, retrieval/persistence and human-playtest gates.
 
 Do not pre-author the whole world merely to make it feel large. Make the world structurally possible, materialize relevant detail, and persist what becomes real.
+
+## Token-safe lived-world experience layer
+
+The six-phase lifecycle establishes a functioning living-world substrate. When the user wants the stronger feeling of *living inside* that world — ordinary routines, bodies, local objects, social customs, incomplete information, player-created history, exploration uncertainty, social barriers, historical scars, or personal belonging — read `references/lived-world-token-safe-experience.md`.
+
+Treat this as an experience layer over existing authorities, **not automatically as a seventh lifecycle phase**. A mature implementation may add all ten capabilities while preserving bounded context:
+
+- Everyday World;
+- Embodiment;
+- Material Culture;
+- Culture/Ritual as social grammar;
+- Information Ecology;
+- Player-created History / creation lineage;
+- Discovery / Unknown Preservation;
+- Social Friction / access and obligation;
+- World Memory / scars and legacy;
+- Belonging / personal anchors.
+
+These capabilities must reuse existing State, Event/Causal, Epistemic, Social, World/Regional, Projection and Validation layers rather than spawning one LLM agent or one mutable subsystem per feature.
+
+A key acceptance property is **context invariance**: enlarging offscreen world population, object catalogs, historical depth or cultural records must not cause the same current scene to grow linearly in prompt size. Prefer deterministic authority/knowledge/location/action filtering before semantic ranking. Do not raise the global token budget as the primary implementation strategy.
 
 ## World growth contract
 
@@ -144,13 +166,14 @@ Read the applicable mode anti-pattern reference as mandatory build-time constrai
 2. Select one primary mode and **load `modes/<mode>/SKILL.md`**. If that mode depends on the generic core, load `modes/generic/SKILL.md` as well using the compatibility mapping.
 3. Classify narrow vs living-world task shape and load only the shared/mode references needed.
 4. If living-world scope applies, assess the six-phase lifecycle and continue from the earliest materially incomplete phase instead of restarting mature work.
-5. Write or update the domain contract before expanding content.
-6. Keep one authority owner per mutable fact class; use explicit transitions, append-only events where appropriate, migrations and deterministic replay.
-7. Separate facts, observations, estimates, beliefs and commentary.
-8. Project sparse state/context by relevance and knowledge rights.
-9. Validate schema, references, legality, privacy, retrieval, save/reload, deterministic replay, mutations and player-facing scenario behavior.
-10. Run long-session gameplay review when the product claims persistent/living-world quality.
-11. Report exact mode, versions, evidence, tests, limitations, human gates and release status.
+5. If lived-world experience depth is in scope, extend existing authorities using `references/lived-world-token-safe-experience.md` and add context-invariance tests rather than more permanent prompt content.
+6. Write or update the domain contract before expanding content.
+7. Keep one authority owner per mutable fact class; use explicit transitions, append-only events where appropriate, migrations and deterministic replay.
+8. Separate facts, observations, estimates, beliefs and commentary.
+9. Project sparse state/context by relevance and knowledge rights.
+10. Validate schema, references, legality, privacy, retrieval, save/reload, deterministic replay, mutations and player-facing scenario behavior.
+11. Run long-session gameplay review when the product claims persistent/living-world quality.
+12. Report exact mode, versions, evidence, tests, limitations, human gates and release status.
 
 ## Mode-specific rules
 
