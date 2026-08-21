@@ -37,10 +37,13 @@ The root `references/` directory contains domain-neutral patterns for persistent
 - `world-growth-and-materialization.md` — stable macro skeletons, latent seeds, deterministic materialization, Canon persistence and bounded context.
 - `character-life-relationship-narrative.md` — private/everyday life, bookmark without destiny inflation, multidimensional relationships, Character Anchors, NPC initiative and causal scene progression.
 - `lived-world-token-safe-experience.md` — everyday life, embodiment, material culture, social grammar, information ecology, player-created history, discovery, social friction, world scars and personal belonging while keeping prompt growth bounded.
+- `sillytavern-first-playability.md` — delivery contract for projects whose real product is the SillyTavern package itself: core-playable Tier A, optional STscript/Quick Replies Tier B, optional future runtime Tier C, plus ST-realistic context and playability gates.
 - `gameplay-review-and-validation.md` — periodic gameplay review and long-session test matrix.
 - `orchestration-and-handoffs.md` — Orca → Muse Spark Contributor → Codex workflow, workspace policy and automatic phase handoffs.
 
 The token-safe lived-world layer is deliberately **not a mandatory seventh lifecycle phase**. It is an experience layer for mature sandboxes that need stronger ordinary-life realism and player-specific history. Its core acceptance property is context invariance: increasing offscreen world size, catalog size or historical depth must not make the same current scene grow linearly in prompt size.
+
+When the requested artifact is directly played in SillyTavern, `sillytavern-first-playability.md` changes the optimization order: **SillyTavern playability and continuity beat future-runtime purity.** Do not require external software merely to implement a cleaner theoretical architecture; optional automation/runtime layers must degrade gracefully.
 
 These shared references prevent a recurring failure mode: a sandbox with lots of lore or an unconstrained LLM but no stable world growth, persistent ordinary people, independent organizations, believable relationships, lived-world texture or long-session validation.
 
