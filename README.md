@@ -36,10 +36,13 @@ The root `references/` directory contains domain-neutral patterns for persistent
 - `living-sandbox-lifecycle.md` — six gated phases: horizon/topology, organizations, actor promotion/life, relationships/narrative, domain depth, long-session hardening.
 - `world-growth-and-materialization.md` — stable macro skeletons, latent seeds, deterministic materialization, Canon persistence and bounded context.
 - `character-life-relationship-narrative.md` — private/everyday life, bookmark without destiny inflation, multidimensional relationships, Character Anchors, NPC initiative and causal scene progression.
+- `lived-world-token-safe-experience.md` — everyday life, embodiment, material culture, social grammar, information ecology, player-created history, discovery, social friction, world scars and personal belonging while keeping prompt growth bounded.
 - `gameplay-review-and-validation.md` — periodic gameplay review and long-session test matrix.
 - `orchestration-and-handoffs.md` — Orca → Muse Spark Contributor → Codex workflow, workspace policy and automatic phase handoffs.
 
-These shared references prevent a recurring failure mode: a sandbox with lots of lore or an unconstrained LLM but no stable world growth, persistent ordinary people, independent organizations, believable relationships or long-session validation.
+The token-safe lived-world layer is deliberately **not a mandatory seventh lifecycle phase**. It is an experience layer for mature sandboxes that need stronger ordinary-life realism and player-specific history. Its core acceptance property is context invariance: increasing offscreen world size, catalog size or historical depth must not make the same current scene grow linearly in prompt size.
+
+These shared references prevent a recurring failure mode: a sandbox with lots of lore or an unconstrained LLM but no stable world growth, persistent ordinary people, independent organizations, believable relationships, lived-world texture or long-session validation.
 
 ## Compatibility note
 
