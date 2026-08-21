@@ -24,12 +24,28 @@ All modes share these invariants:
 - project sparse context rather than raw databases;
 - validate adversarially and report release status honestly.
 
+## Mandatory: load the preserved mode contract
+
+The three original skills are vendored intact under `modes/`. Their presence alone is not enough: after selecting a primary mode, **read and apply its preserved `SKILL.md` before reading mode references or implementing changes**:
+
+- `generic` → `modes/generic/SKILL.md`
+- `competitive` → `modes/competitive/SKILL.md`
+- `cultivation` → `modes/cultivation/SKILL.md`
+
+Resolve relative `assets/`, `references/`, `scripts/`, and `agents/` paths inside a vendored mode contract relative to that `modes/<mode>/` directory.
+
+Competitive and cultivation mode contracts may still mention their historical standalone dependency `$build-persistent-sandbox`. Inside this unified skill, resolve that dependency to `modes/generic/SKILL.md` and `modes/generic/references/...`; do not require a separately installed external generic skill when the vendored core is already present.
+
+Read `references/mode-routing-and-compatibility.md` whenever selecting a mode, auditing the unified skill, or updating vendored sources. Run `python -X utf8 scripts/audit_vendor_parity.py` before claiming the three source modes remain intact after a merge/update.
+
+The root shared layer supplements the selected mode contract. It does not silently replace or weaken mode-specific rules.
+
 ## Determine task shape
 
 Classify the request before building:
 
 ### Narrow subsystem
-Examples: one draft state machine, one rules migration, one retrieval repair, one package validator. Use only the relevant mode references plus shared anti-patterns. Do not force a six-phase living-world program onto a narrow task.
+Examples: one draft state machine, one rules migration, one retrieval repair, one package validator. Read the selected mode contract, then only the relevant mode/shared references. Do not force a six-phase living-world program onto a narrow task.
 
 ### Living / long-running sandbox
 Use the shared lifecycle when the product is expected to support open-ended travel/topology, persistent actors, offscreen organizations, relationships, emergent stories, large time skips, or hundreds of sessions.
@@ -41,7 +57,7 @@ Read:
 - `references/gameplay-review-and-validation.md` — periodic gameplay review, 3h/20h/100h thinking, long-session scenario suite, anti-pattern and release gates.
 - `references/orchestration-and-handoffs.md` — multi-agent execution, Orca/Muse Spark Contributor/Codex role split, workspace policy, no-human-router handoffs.
 
-Then read only the mode-specific references needed for the task under `modes/<mode>/references/`.
+Then read only the selected/generic mode references required by the task under `modes/<mode>/references/`.
 
 ## Shared living-world lifecycle
 
@@ -125,26 +141,29 @@ Read the applicable mode anti-pattern reference as mandatory build-time constrai
 ## Shared core workflow
 
 1. Resolve the real repo/package/workspace and freeze authoritative inputs, IDs, hashes/provenance, schema versions and user scope.
-2. Select one primary mode and task shape.
-3. If living-world scope applies, assess the six-phase lifecycle and continue from the earliest materially incomplete phase instead of restarting mature work.
-4. Write or update the domain contract before expanding content.
-5. Keep one authority owner per mutable fact class; use explicit transitions, append-only events where appropriate, migrations and deterministic replay.
-6. Separate facts, observations, estimates, beliefs and commentary.
-7. Project sparse state/context by relevance and knowledge rights.
-8. Validate schema, references, legality, privacy, retrieval, save/reload, deterministic replay, mutations and player-facing scenario behavior.
-9. Run long-session gameplay review when the product claims persistent/living-world quality.
-10. Report exact mode, versions, evidence, tests, limitations, human gates and release status.
+2. Select one primary mode and **load `modes/<mode>/SKILL.md`**. If that mode depends on the generic core, load `modes/generic/SKILL.md` as well using the compatibility mapping.
+3. Classify narrow vs living-world task shape and load only the shared/mode references needed.
+4. If living-world scope applies, assess the six-phase lifecycle and continue from the earliest materially incomplete phase instead of restarting mature work.
+5. Write or update the domain contract before expanding content.
+6. Keep one authority owner per mutable fact class; use explicit transitions, append-only events where appropriate, migrations and deterministic replay.
+7. Separate facts, observations, estimates, beliefs and commentary.
+8. Project sparse state/context by relevance and knowledge rights.
+9. Validate schema, references, legality, privacy, retrieval, save/reload, deterministic replay, mutations and player-facing scenario behavior.
+10. Run long-session gameplay review when the product claims persistent/living-world quality.
+11. Report exact mode, versions, evidence, tests, limitations, human gates and release status.
 
 ## Mode-specific rules
 
 ### Generic
-Keep vocabulary domain-neutral in the shared core. Put domain concepts in `01_Domain/domain_profile.json`. Use `modes/generic/references/anti-patterns-and-donts.md` as a hard gate for living worlds.
+Load `modes/generic/SKILL.md` first. Keep vocabulary domain-neutral in the shared core. Put domain concepts in `01_Domain/domain_profile.json`. Use `modes/generic/references/anti-patterns-and-donts.md` as a hard gate for living worlds.
 
 ### Competitive
-Pin competition, league/circuit, season/stage, ruleset/patch, roster/eligibility and source date. Keep recommendation separate from legality. Matchups are conditional, not eternal scalar truth. If the product includes persistent careers, teams, staff or daily life, also apply the shared actor/relationship/gameplay lifecycle. Read `modes/competitive/references/competitive-anti-patterns-and-donts.md`.
+Load `modes/competitive/SKILL.md` **and** the generic core when state/history/context/persistence are involved, as the original competitive skill requires. Pin competition, league/circuit, season/stage, ruleset/patch, roster/eligibility and source date. Keep recommendation separate from legality. Matchups are conditional, not eternal scalar truth. If the product includes persistent careers, teams, staff or daily life, also apply the shared actor/relationship/gameplay lifecycle. Read `modes/competitive/references/competitive-anti-patterns-and-donts.md`.
+
+For a new competitive package, the preserved source skill layers on the generic scaffold rather than owning a standalone scaffold: scaffold with the generic core using domain ID `competitive_rules`, then apply `modes/competitive/assets/competitive_domain_profile.json`; include `modes/competitive/assets/draft_contract.schema.json` when draft/lineup mechanics are in scope.
 
 ### Cultivation
-Build a society and simulation rather than a lore pile. Keep public registry, story truth, runtime state and context index separate. Use regional interpretation rather than a universal game level, sparse active casts, layered time ticks, permanent death with legacy, organization/sect ecology, deterministic world expansion and selective SillyTavern packaging. Read `modes/cultivation/references/cultivation-anti-patterns-and-donts.md`.
+Load `modes/cultivation/SKILL.md` plus the generic core where it is referenced. Build a society and simulation rather than a lore pile. Keep public registry, story truth, runtime state and context index separate. Use regional interpretation rather than a universal game level, sparse active casts, layered time ticks, permanent death with legacy, organization/sect ecology, deterministic world expansion and selective SillyTavern packaging. Read `modes/cultivation/references/cultivation-anti-patterns-and-donts.md`.
 
 ## Multi-agent orchestration
 
@@ -159,12 +178,15 @@ The user should not act as a copy/paste router between phases. Respect the user'
 From this skill directory:
 
 ```powershell
+python -X utf8 scripts/audit_vendor_parity.py
 python -X utf8 scripts/scaffold_sandbox.py --mode generic --output <directory> --name <name> --domain <domain_id>
 python -X utf8 scripts/scaffold_sandbox.py --mode cultivation --output <directory> --name <name>
 python -X utf8 scripts/validate_sandbox.py --mode generic --package <directory> --strict
 python -X utf8 scripts/validate_sandbox.py --mode cultivation --package <directory>
 python -X utf8 scripts/validate_sandbox.py --mode competitive --package <directory> --strict
 ```
+
+For competitive from zero, use the generic scaffold route described above; the original competitive skill did not contain its own scaffold script.
 
 The mode-specific scripts under `modes/` remain available for compatibility and direct debugging.
 
