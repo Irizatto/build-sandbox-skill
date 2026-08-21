@@ -1,238 +1,188 @@
-# Cultivation Experience, Openings, and Projection Patterns
+# Cultivation Experience Surface Patterns
 
-Use this reference when improving how a cultivation sandbox **feels to play**: opening momentum, macro-era framing, offscreen-world projection, bounded player-action completion, and prompt/adjudication discipline.
+Use this reference when the world machinery already works but play still has friction at the surface: micro-step interaction, weak first-session pull, poor era orientation, or a wider world that exists in state but is hard for the player to perceive.
 
-These are **patterns, not mandatory subsystems**. Before adopting one, identify the concrete player/world problem it solves, check whether existing architecture already solves it, and estimate agency, context, authority, simulation, and pacing costs. `NO CHANGE` is valid.
+These are **patterns, not a feature quota**. For each candidate classify `KEEP_EXISTING`, `TUNE_EXISTING`, `IMPLEMENT_GAP`, `DEFER_NO_PROVEN_RETURN`, or `BLOCKED`. Only `TUNE_EXISTING` / `IMPLEMENT_GAP` authorize work.
 
-## 1. Tianji / offscreen world slices
+Default approved surface set:
 
-A Tianji slice is a short player-facing glimpse of something happening away from the player character.
+1. bounded auto-drive;
+2. Opening Momentum;
+3. Current Age Snapshot;
+4. Tianji/offscreen slices with epistemic quarantine.
 
-Its job is to make the wider world perceptible without granting the player character omniscience.
+Do not treat this reference as authorization for a macro-era rewrite, a giant adjudication checklist, or continuous drama generation.
 
-Prefer:
+## 1. Bounded auto-drive
 
-`authoritative world state/events → salience selection → read-only slice → renderer`
+Goal: remove low-value conversational friction without taking meaningful decisions away from the player.
 
-Never:
-
-`renderer invents distant drama → distant drama silently becomes canon`
-
-Rules:
-
-- Slices project events or states that already exist, or events first produced and validated by the normal world simulation pipeline.
-- A slice may reveal information to the **user** while remaining unknown to the **player character**.
-- Do not copy slice knowledge into player-character knowledge unless a valid information path later exists.
-- Use slices selectively: long travel, seclusion, training, time skips, chapter transitions, major consequences, or a genuinely salient far-field development.
-- Do not require a fixed number per turn.
-- Ordinary life may be shown. A slice does not need murder, conspiracy, treasure, romance, or catastrophe.
-- A slice should end before it resolves an entire distant causal chain when later uncertainty still matters.
-
-Useful modes include:
-
-- **众生 / Everyday:** a small view of ordinary life elsewhere;
-- **暗流 / Undercurrent:** an already-existing institutional or social pressure becoming relevant;
-- **因果 / Consequence:** a distant effect of prior actions or historical causes.
-
-Acceptance checks:
-
-1. No slice creates an unvalidated world fact.
-2. Removing the slice does not change world state.
-3. Player-character knowledge is unchanged unless separately transmitted.
-4. Save/reload and deterministic replay preserve the source event/state used by the slice.
-
-## 2. Bounded auto-drive
-
-A cultivation GM should not force the player to specify every trivial physical step, but it must not seize important decisions.
-
-Use three action-completion bands:
+Use three bands:
 
 ### AUTO
 
-Routine, reversible, low-risk actions implied by context.
+Routine, reversible, low-risk execution details already implied by context: standing up, ordinary dressing, habitual belongings, walking a known safe route, routine greetings, ordinary etiquette, entering an open public venue, and normal time passage caused by those actions.
 
-Examples: stand up, dress, pack ordinary belongings, walk through a known corridor, greet a clerk, enter a public market, perform routine sect etiquette.
+### ASSUME_WITHIN_INTENT
 
-### ASSUME WITHIN INTENT
+The player has stated a clear goal. The GM may complete obvious intermediate actions if they do not materially change strategic intent, values, allegiance, cultivation path, major resources, long-term relationship commitment, secret exposure, or meaningful risk.
 
-The user has clearly stated the goal; the renderer may fill obvious execution details that do not change the goal, values, allegiance, resources beyond trivial cost, or long-term commitments.
+`去坊市看看` may include leaving home, taking the familiar route, arriving, and observing immediately visible public surroundings.
 
-Example: `去坊市看看` may include leaving residence, ordinary travel, entering the market, observing visible stalls, and normal time passage.
+### STOP_FOR_PLAYER
 
-### STOP FOR PLAYER
+Stop before killing, betrayal, marriage/binding bonds, oath, disciple/lineage commitment, major secret exposure, unknown dangerous consumption, obvious lethal risk, cultivation-path choice, major spending, binding contract, decisive political/institutional commitment, irreversible body/soul modification, or materially different interpretations of ambiguous high-impact intent.
 
-Pause before decisions that are irreversible, identity-defining, high-risk, value-laden, strategically expensive, relationship-binding, or meaningfully uncertain.
+Default policy is **conservative**.
 
-Examples include killing, betrayal, marriage/bonding, becoming a disciple, exposing a major secret, accepting an unknown dangerous medicine, entering an obvious lethal zone, choosing a cultivation path, spending a major resource, signing a binding contract, or making a decisive political commitment.
+> Auto-drive may complete **how** the stated action is carried out. It may not decide **what the player chooses to do next**.
 
-Auto-drive may make the world respond; it may not manufacture player intent.
+Auto-drive must still respect location, travel time, inventory, access, injury, fatigue, cultivation capability, permissions, and known routes.
 
-Acceptance checks:
+Mutation tests should fail if auto-drive is altered to spend a major resource, bypass access/injury, or commit the player to a high-impact choice.
 
-- A terse player action can progress without repeated `what next?` prompts.
-- Major choices remain explicitly player-controlled.
-- Auto-completed actions are consistent with inventory, location, capability, time, and knowledge.
+## 2. Opening Momentum
 
-## 3. Opening Momentum, not mandatory Opening Crisis
-
-A strong opening should make the player feel that the world is already moving.
-
-Do not require poisoning, assassination, apocalypse, a countdown, or immediate combat.
+A strong opening should feel active without requiring an opening crisis.
 
 Within the first few meaningful turns, establish:
 
 `PLACE + PEOPLE + CURRENT PRESSURE + IMMEDIATE CURIOSITY`
 
-The opening should introduce at least one **newly visible variable or change** such as:
+The pressure may be small. Curiosity does **not** require anomaly.
 
-- someone arrives, leaves, or fails to appear;
-- a small rumor reaches the player;
-- a market price has changed;
-- a local rule is being enforced differently;
-- a familiar place has changed hands;
-- a minor anomaly appears;
-- a sect recruitment, inspection, festival, caravan, examination, or seasonal task begins;
-- an old relationship produces a new obligation.
+Valid quiet examples include a regular vendor being absent, a shop changing hands, a medicine costing slightly more, rain delaying transport, a caravan arriving, seasonal work beginning, a familiar person acting differently, a local rule changing, or a teahouse changing its sign.
 
-The change may be small. It must not be forced into a major plot merely to increase dramatic density.
+Preserve multiple opening modes: quiet life, market/social, sect/institutional, travel, exploration, recovery, wonder, mystery, and higher-pressure/crisis.
 
-Opening types may include quiet, social, economic, exploratory, institutional, mystery, wonder, crisis, recovery, or travel openings.
+The player may ignore the initial curiosity. If ignored, the underlying situation continues, fades, resolves, or changes according to world causality. The Director must not enlarge it into a crisis merely to recover attention.
 
-## 4. Current Age Snapshot
+Mutation tests should fail if every opening is forced into a crisis, ignored hooks automatically escalate, or curiosity becomes a mandatory quest.
 
-Do not begin a large cultivation sandbox with a lore dump.
+## 3. Current Age Snapshot
 
-Provide a compact current-age frame that answers:
+Current Age is a **projection of existing Canon**, not permission to invent a new era.
 
-- What kind of era is this?
-- What is changing now?
-- What are people competing over or adapting to?
-- Why does the current period create unusual opportunity, pressure, uncertainty, or mobility?
-- Where is the player located within that era?
+Use:
 
-Keep the player-facing snapshot short enough to function as an orientation layer, while the full historical model remains elsewhere.
+`existing canon / world history / validated current state → 2–4 relevant macro facts → compact orientation`
 
-A useful causal form is:
+The player-facing result should usually be one short paragraph or a few concise lines answering:
 
-`long-term environmental/institutional change → resource/social effects → faction behavior → ordinary-life consequences`
+- what historical moment this is;
+- what is changing now;
+- what ordinary people notice;
+- what kinds of mobility, pressure, or opportunity exist;
+- where the current locality sits within that moment.
 
-Avoid declaring the whole world permanently chaotic merely because the opening needs activity.
+Prefer causal structure:
 
-## 5. Macro-era pressure / “Great Contest” pattern
+`long-term cause → institutional/resource/social consequence → ordinary-life manifestation`
 
-A cultivation world may use a high-mobility era in which opportunities, competition, recruitment, migration, new organizations, exploration, and resource disputes become more common.
+Do not duplicate the same era explanation into GM prompt + World Info + opening prose. Keep full history in canonical lore/retrieval and render a selective snapshot only when relevant: fresh opening, explicit orientation request, meaningful long time skip, arrival in a materially different region, or a committed macro transition.
 
-This is a **world-era condition**, not a plot injector.
+Ordinary home scenes should normally pay zero tokens for this snapshot.
 
-Good implementation:
+If the current Canon does not support a dramatic era pressure, a quiet/stable age is valid. Do not manufacture a Great Contest merely because a reference pattern exists.
 
-`macro cause → measurable regional effects → institutional response → market/social/cultivation consequences`
+## 4. Tianji / offscreen world slices
 
-Possible causes include qi-cycle change, route reopening, demographic growth, institutional fragmentation, technological/technique diffusion, new frontier access, old monopolies weakening, ecological recovery, or the return of previously inaccessible sites.
+Tianji makes the wider world perceptible without making the player character omniscient.
 
-Do not use the era label to justify arbitrary events.
+Core flow:
 
-A “Great Contest” era may increase:
+`authoritative state / committed event → relevance + salience selection → read-only Tianji projection → user-visible rendering`
 
-- recruitment and training demand;
-- migration and social mobility;
-- material demand and price volatility;
-- organization formation and expansion;
-- competition over routes, land, mines, spirit fields, texts, teachers, and disciples;
-- opportunities for previously marginal actors;
-- failure rates and displacement as competition rises.
+Never:
 
-It does **not** imply constant warfare, universal crisis, or that every region is equally affected.
+`renderer invents interesting distant event → event silently becomes canon`
 
-Quiet regions, routine life, stable institutions, and long periods with no major incident must remain possible.
+Removing a Tianji block from display must not alter world state.
 
-## 6. Prompt/adjudication patterns
+Useful sparse modes:
 
-Borrow the discipline of a strong GM checklist without running a giant checklist every turn.
+- `天机·众生` — ordinary life elsewhere;
+- `天机·暗流` — an already-existing social/institutional/economic/cultivation pressure;
+- `天机·因果` — a distant consequence of prior causes.
 
-Use **relevance-triggered modules**.
+Eligible contexts include meaningful time skips, long travel, seclusion, long recovery, phase transitions, salient offscreen consequences, major already-committed regional change, or an explicit request to view the wider world.
 
-Candidate modules:
+Normal turns may produce zero Tianji. Do not use a fixed count or every-N-turn quota.
 
-### World / scene consistency
+## 5. Tianji epistemic quarantine
 
-Check location, time, weather/environment, local qi conditions, visible actors, and world-state consequences only when they matter to the action.
+Hard distinction:
 
-### Capability / law boundary
+`USER KNOWLEDGE != PLAYER CHARACTER KNOWLEDGE != NPC KNOWLEDGE`
 
-Check whether the proposed action is physically, socially, institutionally, and cultivation-mechanically possible. Reject impossible results or resolve to the nearest feasible outcome rather than granting success because the player is important.
+A statement in the GM prompt saying “the PC does not know this” is not sufficient protection when the same secret text remains in subsequent model-visible conversation history.
 
-### Resource / object consistency
+### Tier A safe mode
 
-Check inventory, money, qi/energy, tools, materials, wounds, conditions, access rights, travel time, and scarce facilities when the action consumes or depends on them.
+Without verified outgoing-prompt quarantine, Tianji may show only information that is safe if the model later sees it: broad public macro movement, ordinary non-secret life elsewhere, already-public institutional changes, or low-risk atmosphere.
 
-### Actor / knowledge consistency
+Do not use Tier A Tianji for hidden murder plans, undiscovered identities, private strategy, secret techniques, hidden treasure locations, concealed NPC motives, or other facts whose leakage would damage the epistemic model.
 
-For relevant NPCs, check identity, role, motives, memory, relationship, injury/status, beliefs, and information provenance. NPCs act on what they can know, not on GM truth.
+### Tier B user-only mode
 
-### Combat / breakthrough / exceptional-action checks
+If the deployment supports a scoped outgoing-prompt transformation (for example a SillyTavern Regex rule configured to alter outgoing prompt while leaving chat display/storage intact), user-only Tianji may be marked with a stable wrapper such as:
 
-Activate only when applicable. Verify prerequisites, preparation, environment, resource expenditure, risk, opponent capability, injury, and lasting cost. Do not use narrative importance as a substitute for mechanism.
+```xml
+<天机 type="众生|暗流|因果" visibility="user_only">
+...
+</天机>
+```
 
-### Causal persistence
+The exact syntax is project-specific. The required behavior is:
 
-Promises, debts, tasks, injuries, exposure, reputation, witnessed acts, legal consequences, and unfinished events persist when their causes persist.
+- stored/displayed chat: Tianji remains visible to the user;
+- next outgoing model prompt: the quarantined block is absent;
+- normal non-Tianji prose is preserved;
+- the filter is scoped to the intended character/world rather than globally destructive.
 
-### State synchronization
+If quarantine is unavailable or disabled, secret user-only Tianji must be disabled or downgraded to a safe Tier A slice. Never silently emit secret user-only information without quarantine.
 
-Narrative output and authoritative state must agree. If state changes are required, route them through the project’s normal validation/canonicalization path; prose alone does not mutate truth.
+### Verification
 
-Principle:
+A Tianji quarantine does not PASS because the display looks correct. Verify:
 
-> Trigger only the checks relevant to the current action. Do not pay the token, latency, and rigidity cost of running every module every turn.
+`CHAT DISPLAY contains slice`
 
-## 7. Renderer and summary boundaries
+and
 
-Style profiles, summaries, archives, and slices are presentation/memory aids.
+`OUTGOING PROMPT does not contain quarantined slice`
 
-They are not higher authority than world state.
+Prefer actual assembled-prompt inspection. If only a custom simulator is available, document its fidelity and do not claim exact SillyTavern behavior.
 
-- Renderer may change tone, compression, sensory detail, sentence form, and presentation order.
-- Summary may compress validated history but must not invent missing facts.
-- Archive entries should retain provenance where the project supports it.
-- A stylish or plausible narration must not override a failed validation.
+Mutation tests should fail if the user-only slice is left in the outgoing prompt, copied into PC knowledge, granted to NPCs, or allowed to mutate world state.
 
-## 8. Anti-overuse rules
+## 6. Sparse context and authority
 
-Do not confuse “living world” with continuous event generation.
+Classify every added item as `ALWAYS_ON`, `SELECTIVE`, `RENDER_ONLY`, `OPTIONAL_TIER_B`, or `DEVELOPMENT_ONLY`. Prefer selective/render-only.
 
-A living cultivation world may contain:
+Reject broad common-word triggers, single-character CJK triggers without proof, empty keys, generic titles as entity keys, mega-entries, trigger avalanches, uncontrolled recursion, or renderer-created Canon.
 
-- routine work;
-- quiet travel;
-- uneventful training;
-- recovery;
-- waiting;
-- slow relationship drift;
-- seasonal economic changes;
-- institutions functioning normally;
-- consequences gradually becoming visible.
+The experience surface must reuse existing State, Event/History, Epistemic, Projection, and Validation owners. Do not create a second world authority.
 
-Do not force:
+## 7. Evidence quality
 
-- a countdown into ordinary scenarios;
-- a major hook into every location;
-- Tianji slices every turn;
-- NPC signature traits to dominate all behavior;
-- macro-era pressure to affect every region equally;
-- the entire adjudication checklist on every response.
+Do not count `assert(true)`, fixture self-certification, `expected = implementation output`, or mocks that bypass the real retrieval/authority path as behavioral evidence.
 
-The system should support drama without becoming addicted to drama.
+A meaningful test must be able to fail when the behavior is deliberately broken.
 
-## 9. Adoption rule
+At minimum test:
 
-For each pattern, record one of:
+- low-risk terse action advances naturally;
+- high-impact ambiguous action stops;
+- quiet opening has momentum but no crisis;
+- ignored opening curiosity does not force escalation;
+- Current Age uses existing Canon and does not repeat in unrelated scenes;
+- normal turns can produce zero Tianji;
+- Tianji source maps to authority;
+- user-only Tianji preserves PC/NPC knowledge boundaries;
+- extension/quarantine-off fallback leaves Tier A playable;
+- baseline-vs-final assembled context remains approximately neutral.
 
-- `ALREADY_STRONG`
-- `TUNE`
-- `ADOPT`
-- `OPTIONAL_PATTERN`
-- `REJECT`
-- `DEFER`
+## 8. Final principle
 
-Before `ADOPT`, name the concrete gap and test that the pattern closes it without violating player agency, authority, context budget, deterministic persistence, or quiet-world behavior.
+The experience layer is successful when the world becomes easier to enter, easier to move through, and easier to perceive **without becoming louder, more omniscient, more scripted, or more expensive to prompt**.

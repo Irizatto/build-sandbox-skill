@@ -1,6 +1,6 @@
 {
   "schema": "build_sandbox_vendor_manifest_v1",
-  "generated_at": "2026-08-21",
+  "generated_at": "2026-08-22",
   "modes": {
     "generic": {
       "source_repository": "Irizatto/build-persistent-sandbox",
@@ -18,8 +18,8 @@
     },
     "cultivation": {
       "source_repository": "Irizatto/build-cultivation-sandbox",
-      "source_commit": "f3d9ad9366d602984475d51718d7fee77fa11e72",
-      "source_tree": "e14fc41518f1f226f1e61dc36d01283796e7413d",
+      "source_commit": "9a103a34e6e7726fec652d20624e6d505e9d1130",
+      "source_tree": "7f2fa1d2e352d0c766e45e361aada5a97d18c4b7",
       "vendored_path": "modes/cultivation",
       "required_contract": "modes/cultivation/SKILL.md"
     }
