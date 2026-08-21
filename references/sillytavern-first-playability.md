@@ -30,6 +30,47 @@ Every selected change should be explainable as:
 
 If that chain is unclear, do not keep the change.
 
+## Product / harness evidence boundary
+
+A SillyTavern-first project may contain an external JS/Python harness, schemas, deterministic simulators or validators **without making those tools part of the playable product**. This is valid when the boundary is explicit.
+
+Classify evidence separately:
+
+- **Tier A product evidence** — the authoritative Character Card / GM spec / World Info / registries actually imported or used by SillyTavern, plus player-facing regression evidence.
+- **Tier B enhancement evidence** — optional STscript / Quick Replies / selective World Info or similar artifacts that a player may enable, with extension-off fallback.
+- **Tier C validation-harness evidence** — external scripts, schemas, replay/simulation prototypes, validators and test fixtures used to check invariants or future-runtime ideas.
+
+A Tier C harness may prove schema validity, stable IDs, deterministic materialization, idempotency, migration behavior or other properties it genuinely exercises. It does **not** by itself prove that SillyTavern players experience those behaviors.
+
+Do not reject a healthy Tier A package merely because a removable Tier C harness exists outside its manifest. Conversely, do not call a feature implemented in the playable package merely because a harness contains a class, schema or passing unit test for it.
+
+### Acceptance-evidence rule
+
+A test counts as acceptance evidence only when its assertion can fail because the behavior under test is wrong.
+
+Reject as behavioral proof:
+
+- `assert(true)` / unconditional PASS markers;
+- tests that only assert a fixture value they just assigned;
+- mocks that bypass the authority/retrieval/state transition being claimed;
+- a synthetic projection that is not linked to the actual ST package while being presented as measured ST context;
+- report prose that has no inspectable artifact/test behind it.
+
+Such placeholders may remain during development, but they must be labeled `SCAFFOLD / NOT VERIFIED` and excluded from PASS counts.
+
+For player-facing claims such as mundane 20-turn play, recurring-NPC continuity, anti-protagonist behavior, knowledge firewall, long absence, social access or long-session stability, require either a real ST-facing scenario test or a faithful package-level simulation that exercises the same prompt/lore/state path. Human playtest remains a separate higher evidence tier.
+
+### Baseline integrity evidence
+
+Before treating an existing ST package as the baseline, verify as available:
+
+- canonical card / GM / World Info / registry files still exist at expected paths;
+- manifest/package-integrity hashes still match when the package uses them;
+- import instructions still identify the playable artifacts;
+- optional add-on directories are outside the authoritative manifest unless intentionally promoted;
+- disabling/removing optional add-ons leaves Tier A playable;
+- no validation harness silently replaced the canonical package.
+
 ## Delivery tiers
 
 ### Tier A — required core-playable package
@@ -102,6 +143,8 @@ These are default engineering guardrails, not universal quotas. A project's stri
 
 A capability irrelevant to the current scene should contribute zero or near-zero prompt content. When a new selective facet adds value, remove or compact redundant old prose where safe instead of stacking both.
 
+For a claim of measured ST context, prefer the actual assembled ST prompt/context or an explicitly documented faithful assembler using the real card/World Info activation rules. A synthetic JSON projection is useful engineering evidence but must not be labeled actual ST context unless equivalence is demonstrated.
+
 ## Lived-world capability mapping for ST
 
 When applying `lived-world-token-safe-experience.md`, **audit all ten but implement only measured gaps**:
@@ -165,9 +208,10 @@ State explicitly which behaviors are:
 - guaranteed by core/package structure;
 - enhanced by optional STscript/Quick Replies;
 - approximate through LLM/GM behavior;
+- supported only by Tier C validation/future-runtime prototypes;
 - deferred to optional extension/runtime work.
 
-Do not call approximate SillyTavern behavior a deterministic external-world simulation.
+Do not call approximate SillyTavern behavior a deterministic external-world simulation. Do not upgrade placeholder tests into evidence merely because the test command exits green.
 
 ## Final criterion
 
