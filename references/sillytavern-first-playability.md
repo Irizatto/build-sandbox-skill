@@ -10,6 +10,26 @@ For this target, optimize in this order:
 
 Do not turn a working SillyTavern package into a prototype for a future client.
 
+## Mature-baseline / delta-only rule
+
+When the package already has a mature persistent-world baseline, do **not** implement every listed lived-world capability merely because the reference mentions it.
+
+First freeze and measure the working baseline. Classify each candidate capability as:
+
+- `KEEP_EXISTING` — the current package already produces the desired play experience;
+- `TUNE_EXISTING` — a small targeted change has clear player-facing value;
+- `IMPLEMENT_GAP` — a real playability gap exists;
+- `DEFER_NO_PROVEN_RETURN` — possible feature, but current value does not justify complexity;
+- `BLOCKED` — requires an explicit product decision or forbidden dependency.
+
+Only `TUNE_EXISTING` and `IMPLEMENT_GAP` authorize implementation work. `KEEP_EXISTING` must not receive a second state owner, extra World Info, scripts, schemas or prompt sections just for completeness.
+
+Every selected change should be explainable as:
+
+`baseline weakness → smallest safe change → player-visible improvement → measured context/state cost`
+
+If that chain is unclear, do not keep the change.
+
 ## Delivery tiers
 
 ### Tier A — required core-playable package
@@ -66,25 +86,25 @@ Reject or mutation-test:
 
 Vector/embedding retrieval is optional recall support. It must not own secrets, alive/dead state, current location, ownership, access permission, relationship truth or other critical Canon.
 
-## Token-safety rule
+## Token-neutrality rule
 
-Do not solve lived-world depth by increasing the global World Info/context budget. Measure the actual assembled prompt/context.
+Do not solve lived-world depth by increasing the global World Info/context budget. Measure the actual assembled prompt/context against the working baseline.
 
-For an ST-first lived-world extension, the same ordinary scene should remain approximately bounded when inactive offscreen actors, catalogs, histories or cultural records are multiplied. Prefer selective activation and sparse facets over rolling summaries.
+For mature packages, prefer **approximately token-neutral migration** over additive prompt growth. A useful default guardrail is:
 
-A useful default target for additional lived-world context is:
+- always-on/core prompt delta: target `<= +100 tokens`, preferably `<= 0`;
+- ordinary inactive scene: increase no more than the smaller of `+5%` or `+200 tokens`;
+- ordinary social scene: increase no more than the smaller of `+7%` or `+350 tokens`;
+- dense local cultural/history scene: increase no more than the smaller of `+10%` or `+600 tokens`;
+- multiplying inactive actors/catalog/history by 10x should not make the same scene grow by more than the smaller of `+5%` or `+200 tokens`.
 
-- simple mundane scene: about 150–600 tokens;
-- ordinary social scene: about 300–900;
-- dense local cultural/history scene: preferably about 500–1,300;
-- treat about 1,500 incremental tokens as a warning boundary;
-- >2,000 incremental tokens requires measured justification.
+These are default engineering guardrails, not universal quotas. A project's stricter measured baseline wins.
 
-Project budgets are not quotas to fill; stricter project limits win.
+A capability irrelevant to the current scene should contribute zero or near-zero prompt content. When a new selective facet adds value, remove or compact redundant old prose where safe instead of stacking both.
 
 ## Lived-world capability mapping for ST
 
-When applying `lived-world-token-safe-experience.md`, implement the ten capabilities in ST-first form:
+When applying `lived-world-token-safe-experience.md`, **audit all ten but implement only measured gaps**:
 
 1. **Everyday World** — recurring mundane anchors, local routine/daypart facets and ordinary actions; not a citywide always-on schedule.
 2. **Embodiment** — small qualitative conditions; normal state omitted; optional compact chat-local state.
@@ -97,23 +117,25 @@ When applying `lived-world-token-safe-experience.md`, implement the ten capabili
 9. **World Scars** — current consequence facets tied to event provenance; do not inject full old transcripts.
 10. **Belonging** — sparse home/familiar-place/contact/shared-history anchors; no universal belonging scalar.
 
+If the existing package already passes the relevant player-facing test for one of these capabilities, record `KEEP_EXISTING` and do not enlarge the package for that item.
+
 ## Playability-first implementation order
 
-When all ten are in scope, prefer:
+For selected gaps only, prefer high-return work first:
 
-A. Everyday World → Embodiment → Social Friction → Discovery.
+A. ordinary life / anti-forced-plot / recurring-place continuity;
 
-B. Material Culture → Culture/Ritual.
+B. knowledge leakage / unknown preservation / social access;
 
-C. Information Ecology → World Scars.
+C. embodiment / local material and cultural differentiation;
 
-D. Personal Anchors/Belonging → Player-created History.
+D. world scars / personal revisit / player-created history.
 
-Run a player-facing gate after each group. Do not postpone simple ST-native improvements while building a generalized future runtime.
+Run a player-facing and context gate after each selected change. If a change does not produce clear player-visible value, revert it rather than keeping it because implementation work was already spent.
 
 ## Mandatory ST-realistic tests
 
-At minimum verify:
+At minimum verify, as applicable to the selected gaps and existing baseline:
 
 1. fresh chat/opening regression;
 2. 20-turn mundane play without forced major plot;
@@ -125,12 +147,16 @@ At minimum verify:
 8. unknown preservation and stable later materialization;
 9. historical-scar revisit without full-history injection;
 10. long-absence personal-anchor revisit;
-11. modest player-created object/practice persistence without fame inflation;
+11. modest player-created object/practice persistence without fame inflation when creation is in scope;
 12. World Info trigger collisions and recursive activation;
 13. chat reload/branch safety for any STscript variables;
-14. extension-off fallback if Tier B artifacts exist.
+14. extension-off fallback if Tier B artifacts exist;
+15. baseline-vs-final assembled-context comparison;
+16. inactive-world scale stress proving context does not grow with irrelevant world size.
 
-The build is incomplete if it is architecturally elegant but harder to import, start, understand, or continue playing than the previous working package.
+A capability classified `KEEP_EXISTING` may pass its test with zero implementation change. That is a successful result, not missing work.
+
+The build is incomplete if it is architecturally elegant but harder to import, start, understand, continue playing, or keep within context than the previous working package.
 
 ## Release honesty
 
@@ -145,6 +171,6 @@ Do not call approximate SillyTavern behavior a deterministic external-world simu
 
 ## Final criterion
 
-A normal player should be able to import/open the package and experience a more inhabited persistent world without the future custom software, without routine manual state maintenance, and without ordinary context becoming noticeably larger.
+A normal player should be able to import/open the package and experience a measurably more inhabited or choice-rich world **only where the baseline had a real gap**, without future custom software, routine manual state maintenance, duplicate authority, or a noticeable increase in ordinary assembled context.
 
-**For an ST-first deliverable, the best architecture is the architecture the player can actually play.**
+**For an ST-first deliverable, more features are not success. More play per token is success.**
