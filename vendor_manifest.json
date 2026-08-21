@@ -1,0 +1,28 @@
+{
+  "schema": "build_sandbox_vendor_manifest_v1",
+  "generated_at": "2026-08-21",
+  "modes": {
+    "generic": {
+      "source_repository": "Irizatto/build-persistent-sandbox",
+      "source_commit": "32bf3e8da16996f3e0734a25c1f520a6e2c41a49",
+      "source_tree": "333fb85d2a7218d0732f1a24d70d7093f694f43e",
+      "vendored_path": "modes/generic",
+      "required_contract": "modes/generic/SKILL.md"
+    },
+    "competitive": {
+      "source_repository": "Irizatto/build-competitive-rules-sandbox",
+      "source_commit": "1682da46ffcc8828130264341f8d5f4cb7016c0d",
+      "source_tree": "a178cd93c73e855120240bb38520cac73e6302eb",
+      "vendored_path": "modes/competitive",
+      "required_contract": "modes/competitive/SKILL.md"
+    },
+    "cultivation": {
+      "source_repository": "Irizatto/build-cultivation-sandbox",
+      "source_commit": "f3d9ad9366d602984475d51718d7fee77fa11e72",
+      "source_tree": "e14fc41518f1f226f1e61dc36d01283796e7413d",
+      "vendored_path": "modes/cultivation",
+      "required_contract": "modes/cultivation/SKILL.md"
+    }
+  },
+  "rule": "A vendored mode is parity-clean only when its git tree SHA equals the recorded source_tree. Shared root references may add behavior but must not silently replace or weaken a mode contract."
+}
