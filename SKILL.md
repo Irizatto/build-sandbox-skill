@@ -1,45 +1,158 @@
 ---
 name: build-sandbox
-description: Build, expand, migrate, validate, and package one persistent sandbox skill in generic, competitive, or cultivation form. Use one mode per build unless the user explicitly requests a crossover.
+description: Build, expand, migrate, validate, and package persistent sandboxes in generic, competitive, or cultivation form. Use for executable world/state systems, living-world expansion, deterministic materialization, organization ecology, persistent character life, relationship/narrative runtime, long-session gameplay review, and SillyTavern/world-simulation packaging. Use one primary mode per build unless the user explicitly requests a crossover.
 ---
 
 # Build Sandbox
 
-Use this single skill as the entry point for three forms of the same system:
+Use this as the single entry point for three forms of the same persistent-sandbox architecture:
 
-- `generic` — domain-neutral persistent worlds, executable mechanics, state, history, retrieval, migration, and validation.
-- `competitive` — versioned leagues, tournaments, drafts, lineups, rosters, seasons, and conditional matchup logic.
-- `cultivation` — long-running xianxia worlds, sects, NPC ecology, generational change, SillyTavern packaging, and knowledge firewalls.
+- `generic` — domain-neutral persistent worlds, executable mechanics, state, history, retrieval, migration, world growth, organizations, actors, and validation.
+- `competitive` — versioned competitions, drafts, lineups, rosters, seasons, careers, teams, staff, conditional matchup logic, and optional living-world/social simulation.
+- `cultivation` — long-running xianxia worlds, sect/faction ecosystems, actor ecology, generational change, world expansion, SillyTavern packaging, and knowledge firewalls.
 
-## Select exactly one form
+## Select exactly one primary mode
 
-Start every task by selecting `--mode generic`, `--mode competitive`, or `--mode cultivation` in the command examples, and declare that mode in the package's domain profile. Do not combine forms merely to add content. A crossover requires an explicit secondary domain, mapping, conflict matrix, and leakage tests.
+Start by selecting `generic`, `competitive`, or `cultivation`, and declare it in the package domain profile. Do not combine modes merely to add flavor. A real crossover requires explicit secondary domains, mapping, a conflict matrix, authority decisions, and leakage tests.
 
-All forms share the same principles: freeze authority, use stable IDs, formalize consequential mechanics as state machines, separate public/private knowledge, project sparse context, preserve history, validate adversarially, and report release status honestly.
+All modes share these invariants:
+- freeze authority and provenance before generation;
+- use stable IDs and explicit versioning;
+- formalize consequential transitions rather than trusting prose;
+- separate world truth, actor belief, player knowledge, rumor, commentary and projections;
+- preserve history and offscreen agency;
+- project sparse context rather than raw databases;
+- validate adversarially and report release status honestly.
+
+## Determine task shape
+
+Classify the request before building:
+
+### Narrow subsystem
+Examples: one draft state machine, one rules migration, one retrieval repair, one package validator. Use only the relevant mode references plus shared anti-patterns. Do not force a six-phase living-world program onto a narrow task.
+
+### Living / long-running sandbox
+Use the shared lifecycle when the product is expected to support open-ended travel/topology, persistent actors, offscreen organizations, relationships, emergent stories, large time skips, or hundreds of sessions.
+
+Read:
+- `references/living-sandbox-lifecycle.md` — six gated phases from horizon/topology through long-session hardening.
+- `references/world-growth-and-materialization.md` — macro skeletons, latent seeds, deterministic materialization, organization seeds, actor promotion, Canon persistence.
+- `references/character-life-relationship-narrative.md` — private/everyday life, actor promotion, multidimensional relationships, Character Anchors, NPC initiative, causal Story Beat runtime, reusable roleplay-card design patterns.
+- `references/gameplay-review-and-validation.md` — periodic gameplay review, 3h/20h/100h thinking, long-session scenario suite, anti-pattern and release gates.
+- `references/orchestration-and-handoffs.md` — multi-agent execution, Orca/Muse Spark Contributor/Codex role split, workspace policy, no-human-router handoffs.
+
+Then read only the mode-specific references needed for the task under `modes/<mode>/references/`.
+
+## Shared living-world lifecycle
+
+For a mature open-ended sandbox, assess these six phases even when some are already implemented:
+
+1. **Horizon / Topology Foundation** — the world/ecosystem continues beyond the starting slice through a stable macro skeleton, aggregate offscreen state, latent seeds, deterministic materialization and sparse context.
+2. **Organization / Institution Ecology** — organizations can form, persist, split, merge, decline, dissolve and leave legacies through resources, governance, membership and succession.
+3. **Actor Promotion / Character Life** — ordinary actors can become persistent through history/bookmark without gaining destiny privileges; important actors have voice, routine, social and private lives.
+4. **Relationship / Narrative Runtime** — relationships are multidimensional history; Character Anchors, NPC initiative and causal beat proposals keep scenes alive without forced drama.
+5. **Domain Depth / Wonder / Affordance Ecology** — the selected domain creates genuinely different gameplay rather than more names.
+6. **Long-Session Gameplay Hardening** — mundane life, recurring actors, absence, long skips, anti-protagonist play, weird actions, retrieval/persistence and human-playtest gates.
+
+Do not pre-author the whole world merely to make it feel large. Make the world structurally possible, materialize relevant detail, and persist what becomes real.
+
+## World growth contract
+
+When the sandbox may expand beyond an initial slice, prefer:
+
+`stable macro skeleton → latent seeds → relevance/history trigger → deterministic materialization → stable ID → Canon → runtime evolution`
+
+Latent areas/organizations may accumulate coarse history before detailed materialization. Once an identity is committed, generator/model/schema upgrades must not reroll it. Unknowns may remain unknown.
+
+World size must not equal prompt size. Use hierarchical/facet retrieval and measure the assembled context.
+
+## Actor and character-life contract
+
+Separate:
+- world importance;
+- simulation importance/detail;
+- current narrative relevance;
+- player bookmark/favorite.
+
+A bookmark may improve retention, memory and simulation detail. It must not automatically change power, fame, luck, affection, attraction, access, plot armor, availability or world importance.
+
+For important actors, progressively support public/professional/private self, goals, contradictions, routine, hobbies, home/personal-space habits, social circles, state-dependent behavior, voice, meaningful memories and independent offscreen action.
+
+Do not let all major actors converge on one rational/optimization personality template.
+
+## Relationship and narrative contract
+
+Do not reduce relationships to one affection number when the domain requires richer social simulation. Model relevant dimensions, potentially asymmetrically, with causal history and boundaries.
+
+Narrative runtime should follow:
+
+`actor anchors → scene state → progress/repetition signals → stagnation detector → beat candidates → causal eligibility → proposal → authoritative validation/commit → narrative projection`
+
+Never force a plot beat every N turns or by a flat probability. `Nothing important happens` is valid gameplay.
+
+## Roleplay-card pattern extraction
+
+When studying third-party cards or lorebooks, extract transferable structure rather than copying plots or unsafe content. Useful patterns include:
+- Character Anchors and dialogue exemplars;
+- public/private self and boundaries;
+- Entity Facet Retrieval and hierarchical retrieval;
+- procedural generation axes;
+- history/official record/faction interpretation/folklore/rumor layers;
+- deferred open-world plot states;
+- player-agency guards;
+- state/UI/narrative projection separation;
+- validated world-mutation transactions.
+
+Adult/NSFW source material may contribute only compliant structural lessons such as boundaries, trust, private self and relationship stages. Do not reproduce explicit sexual content, coercive content, unsafe age framing, or source-specific scenes.
+
+## Retrieval and context hard gates
+
+Across all modes, reject or constrain:
+- high-frequency generic keys;
+- empty keys;
+- single-character CJK keys without explicit justification and collision tests;
+- generic titles/roles as entity-specific triggers;
+- ambiguous short aliases;
+- mega-entries;
+- uncontrolled recursive retrieval;
+- lore hits treated as proof of current presence/state/knowledge;
+- static World Info owning mutable facts;
+- raw full-database prompt injection;
+- solving context pressure only by raising token budgets.
+
+Read the applicable mode anti-pattern reference as mandatory build-time constraints.
 
 ## Shared core workflow
 
-1. Freeze authoritative inputs, IDs, source provenance, and user scope.
-2. Select one form and read only its references under `modes/<form>/references/`.
-3. Write the domain contract before adding lore or recommendations.
-4. Keep state ownership singular; use append-only events and deterministic replay.
-5. Separate official facts, observed data, estimates, beliefs, and commentary.
-6. Validate schema, references, legality, privacy boundaries, retrieval, replay, save/reload, and mutations.
-7. Report exact mode, versions, evidence dates, tests, limitations, and human gates.
+1. Resolve the real repo/package/workspace and freeze authoritative inputs, IDs, hashes/provenance, schema versions and user scope.
+2. Select one primary mode and task shape.
+3. If living-world scope applies, assess the six-phase lifecycle and continue from the earliest materially incomplete phase instead of restarting mature work.
+4. Write or update the domain contract before expanding content.
+5. Keep one authority owner per mutable fact class; use explicit transitions, append-only events where appropriate, migrations and deterministic replay.
+6. Separate facts, observations, estimates, beliefs and commentary.
+7. Project sparse state/context by relevance and knowledge rights.
+8. Validate schema, references, legality, privacy, retrieval, save/reload, deterministic replay, mutations and player-facing scenario behavior.
+9. Run long-session gameplay review when the product claims persistent/living-world quality.
+10. Report exact mode, versions, evidence, tests, limitations, human gates and release status.
 
 ## Mode-specific rules
 
 ### Generic
-
-Keep vocabulary domain-neutral and use the persistent package layout. Use the generic scaffold and validator. Domain terms belong in `01_Domain/domain_profile.json`, never in the core.
+Keep vocabulary domain-neutral in the shared core. Put domain concepts in `01_Domain/domain_profile.json`. Use `modes/generic/references/anti-patterns-and-donts.md` as a hard gate for living worlds.
 
 ### Competitive
-
-Use title-neutral competitive terms. Model drafts and lineups as legal state machines. Keep recommendation separate from legality. Matchups are conditional on patch, role, map, side, composition, proficiency, evidence, confidence, and freshness.
+Pin competition, league/circuit, season/stage, ruleset/patch, roster/eligibility and source date. Keep recommendation separate from legality. Matchups are conditional, not eternal scalar truth. If the product includes persistent careers, teams, staff or daily life, also apply the shared actor/relationship/gameplay lifecycle. Read `modes/competitive/references/competitive-anti-patterns-and-donts.md`.
 
 ### Cultivation
+Build a society and simulation rather than a lore pile. Keep public registry, story truth, runtime state and context index separate. Use regional interpretation rather than a universal game level, sparse active casts, layered time ticks, permanent death with legacy, organization/sect ecology, deterministic world expansion and selective SillyTavern packaging. Read `modes/cultivation/references/cultivation-anti-patterns-and-donts.md`.
 
-Build a society and simulation rather than a lore pile. Keep public registry, story truth, runtime state, and context index separate. Use sparse active casts, layered time ticks, permanent death with legacy persistence, and selective SillyTavern packaging.
+## Multi-agent orchestration
+
+When Orca, Muse Spark Contributor and Codex are available for a large build, prefer:
+
+`Orca orchestration/workspace → Muse Spark Contributor primary implementation → Codex independent audit/small fixes → acceptance handoff`
+
+The user should not act as a copy/paste router between phases. Respect the user's workspace-root policy; for the Windows `D:\AI` policy, do not place project/worktree/agent/build/cache work on `C:\`. See `references/orchestration-and-handoffs.md`.
 
 ## Commands
 
@@ -53,4 +166,8 @@ python -X utf8 scripts/validate_sandbox.py --mode cultivation --package <directo
 python -X utf8 scripts/validate_sandbox.py --mode competitive --package <directory> --strict
 ```
 
-The original mode-specific scripts remain under `modes/` for compatibility and direct debugging. The root scripts are the recommended single-skill interface.
+The mode-specific scripts under `modes/` remain available for compatibility and direct debugging.
+
+## Release honesty
+
+Do not call a build Final because JSON parses, simulations run, or agent scenario tests pass. Distinguish automated validation, deterministic long-run simulation, agent-driven gameplay scenarios and actual human long-session playtesting. Use Alpha or Release Candidate until the relevant experiential gates are honestly satisfied.
