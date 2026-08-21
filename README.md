@@ -43,7 +43,7 @@ The root `references/` directory contains domain-neutral patterns for persistent
 
 The token-safe lived-world layer is deliberately **not a mandatory seventh lifecycle phase**. It is an experience layer for mature sandboxes that need stronger ordinary-life realism and player-specific history. Its core acceptance property is context invariance: increasing offscreen world size, catalog size or historical depth must not make the same current scene grow linearly in prompt size.
 
-When the requested artifact is directly played in SillyTavern, `sillytavern-first-playability.md` changes the optimization order: **SillyTavern playability and continuity beat future-runtime purity.** Do not require external software merely to implement a cleaner theoretical architecture; optional automation/runtime layers must degrade gracefully.
+When the requested artifact is directly played in SillyTavern, `sillytavern-first-playability.md` changes the optimization order: **SillyTavern playability and continuity beat future-runtime purity.** For an already mature/working package, lived-world capabilities are a diagnostic checklist rather than a feature quota: freeze and measure the baseline, keep capabilities that already play well, implement only gaps with clear player-visible return, and keep ordinary assembled context approximately token-neutral.
 
 These shared references prevent a recurring failure mode: a sandbox with lots of lore or an unconstrained LLM but no stable world growth, persistent ordinary people, independent organizations, believable relationships, lived-world texture or long-session validation.
 
