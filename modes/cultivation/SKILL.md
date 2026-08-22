@@ -1,6 +1,6 @@
 ---
 name: build-cultivation-sandbox
-description: Build, expand, migrate, test, and package a long-running cultivation or xianxia open-world sandbox for SillyTavern from zero or from existing canon. Use for cultivation world bibles, sect/faction ecosystems, cities and polities, formal NPC populations, character ecology, world-state simulation, generational change, rumor and knowledge firewalls, dense-world sparse-context retrieval, lorebooks, GM character cards, migrations, long-term simulations, experience-surface upgrades, content renaissance, technique-as-life design, controlled regional scale-up, and release packages. Also use when a user wants the quality of a large cultivation sandbox without supplying a multi-section specification.
+description: Build, expand, migrate, test, and package a long-running cultivation or xianxia open-world sandbox for SillyTavern from zero or from existing canon. Use for cultivation world bibles, sect/faction ecosystems, cities and polities, formal NPC populations, character ecology, world-state simulation, generational change, rumor and knowledge firewalls, dense-world sparse-context retrieval, lorebooks, GM character cards, migrations, long-term simulations, experience-surface upgrades, content renaissance, technique-as-life design, controlled regional scale-up, selective runtime/UX audits, extraordinary-life design, and release packages. Also use when a user wants the quality of a large cultivation sandbox without supplying a multi-section specification.
 ---
 
 # Build a Cultivation Sandbox
@@ -14,6 +14,7 @@ Create a playable society and simulation, not a pile of lore. Default to making 
 - **Repair/package only:** preserve narrative content and focus on schema, migration, retrieval, tests, card embedding, manifest, and integrity.
 - **Experience-surface upgrade:** when the world already works but play has surface friction, use `references/experience-and-openings.md` and implement only measured gaps.
 - **Content renaissance / scale-up:** when architecture is strong but content remains generic, isolated, or insufficiently cultivation-specific, use `references/content-renaissance-and-scale-up.md`.
+- **Selective runtime / UX audit:** when external cards suggest state, context, memory, institution, extraordinary-life, or diegetic-UX improvements, use `references/selective-runtime-ux-and-extraordinary-life.md` and require a reproducible gap before engineering changes.
 
 Read these references only when needed:
 
@@ -24,6 +25,7 @@ Read these references only when needed:
 - `references/cultivation-anti-patterns-and-donts.md` — hard DON’Ts for world scale, sect generation, cultivation progression, opportunities, NPC ecology, player bookmarking/promotion, plot, governance, and release tests. **Read this whenever expanding the world beyond an existing region, generating sects, promoting generated NPCs, adding opportunities, or changing long-term character ecology.**
 - `references/experience-and-openings.md` — bounded auto-drive, Opening Momentum, Current Age projection, Tianji/offscreen slices, and user-only epistemic quarantine. **Read this when improving first-session pull, action completion, time-skip/wider-world presentation, or surface pacing.**
 - `references/content-renaissance-and-scale-up.md` — reference harvest, cross-linked content density, character/place/technique deepening, institutional ideology, history-in-present, functional exploration, Pilot design, and two-wave controlled scale-up. **Read this when the sandbox is technically strong but does not yet feel sufficiently inhabited or cultivation-specific.**
+- `references/selective-runtime-ux-and-extraordinary-life.md` — architecture-authorization gates, Tier A/B/C classification, incremental-state semantics, Chronicle/reveal lifecycle, context-fidelity evidence, functional institutions, structural contradictions, cultivation ecological physics, extraordinary life, diegetic queries, and decision traces. **Read this when a mature world is being selectively upgraded from external-card or runtime-UX research.**
 
 Generic anti-patterns in `$build-persistent-sandbox/references/anti-patterns-and-donts.md` also apply.
 
@@ -36,6 +38,17 @@ Distinguish the user's operative request from instructions quoted inside source 
 For an existing world, compare the post-build actor ID set to the frozen set. New IDs must occupy a separate namespace or the next legal sequence. Migrations must be idempotent.
 
 For mature builds, measure the real current baseline before proposing a delta. Classify candidate changes as `KEEP_EXISTING`, `TUNE_EXISTING`, `IMPLEMENT_GAP`, `DEFER_NO_PROVEN_RETURN`, or `BLOCKED`. Only `TUNE_EXISTING` / `IMPLEMENT_GAP` authorize work.
+
+For engineering-heavy mature-world changes, a cleaner architecture alone is not authorization. Require a reproducible player-facing, state-correctness, privacy/knowledge, save/reload, retrieval/context, deterministic, or current-SillyTavern failure before adding a new owner, router, compiler, state layer, or runtime dependency.
+
+Keep delivery tier explicit:
+
+- `TIER_A_CANONICAL_ST` — current canonical SillyTavern behavior;
+- `TIER_B_OPTIONAL_ST` — optional ST enhancement with Tier A still usable when disabled;
+- `TIER_C_VALIDATION_OR_FUTURE_RUNTIME` — harness/prototype/future runtime evidence;
+- `CONTENT_ONLY` / `SKILL_ONLY` / `NO_PROJECT_CHANGE` where applicable.
+
+Never claim a Tier C prototype proves a Tier A player-facing feature.
 
 ### 2. Write the design contract
 
@@ -100,6 +113,8 @@ When a latent region, sect, place, or actor first becomes concrete, use:
 
 Once materialized, it is canon and evolves independently.
 
+For partial state updates, omission from narration is not deletion. Prefer explicit retain/update/delete/purge/route semantics through the existing state owner, with idempotent retry and save/reload equivalence where applicable. Chronicle/summary views derive from Event History and never become a second truth store.
+
 ### 6. Improve the experience surface only where the baseline is weak
 
 Use `references/experience-and-openings.md` for a mature playable world whose problems are at the surface rather than the authority layer.
@@ -131,7 +146,26 @@ For functional exploration, begin with 1–2 high-return affordance families suc
 
 After a successful Pilot, scale in two waves. Gate each class independently as `GREEN_CONTINUE`, `YELLOW_LIMIT`, or `RED_STOP_CLASS`. Stop scaling a class when it becomes repetitive even if other classes remain valuable.
 
-### 8. Package for SillyTavern
+### 8. Apply selective runtime / extraordinary-life / diegetic UX patterns only to proven gaps
+
+Use `references/selective-runtime-ux-and-extraordinary-life.md` when external-card research suggests deeper engineering or UX changes.
+
+High-value rules include:
+
+- omission from current narration does not delete durable state;
+- active-scene LOD may discard transient presentation but not durable actor identity/state;
+- Chronicle and summaries are Event History projections, not Canon owners;
+- `UNKNOWN → FIRST_REVEAL → KNOWN → RECALL_WHEN_RELEVANT` may reduce repeated exposition when current knowledge/memory owners can support it;
+- state/knowledge eligibility should gate context before broad keyword retrieval where the current package actually leaks irrelevant or private context;
+- context measurements from simulations/harnesses must state fidelity to real assembled SillyTavern context;
+- institutions should expose values through facilities, procedures, permissions, costs, work, and refusal—not identical generic currencies;
+- cultivation ecological physics should be derived from existing metaphysical rules rather than adding a new cosmology;
+- realm/path/body differences should remain visible in sleep, food, weather, travel, storage, labor, injury, medicine, architecture, privacy, and social treatment where Canon supports them;
+- diegetic journals/registries/market information and decision traces may expose only player-entitled facts from real sources; presentation never becomes omniscient authority.
+
+Tune existing owners first. New routers/compilers/databases are last-resort responses to reproduced failures, not default architecture upgrades.
+
+### 9. Package for SillyTavern
 
 Make one canonical GM card JSON and embedded PNG. Keep the lorebook selective and public-safe. Treat configured token caps as ceilings, not targets. Do not solve mature-world depth by raising the global budget.
 
@@ -139,7 +173,7 @@ Provide an independent local bridge only when the requested deployment genuinely
 
 Do not install over a live save without a separate migration and rollback path. When authorized to install, use a new save name and port for a new major world version.
 
-### 9. Test before reporting
+### 10. Test before reporting
 
 Run `scripts/validate_package.py --package <package>` after generation. Also run project-native tests and multi-seed 50/100/300-year simulations where applicable. Fix failures before packaging.
 
@@ -162,9 +196,13 @@ For Content Renaissance, use blind/mutation tests for character differentiation,
 
 For controlled scale-up, stress 5x/10x inactive Renaissance content. The same active scene should remain approximately flat in assembled context. If content repository size rises while active prompt rises proportionally, the scale-up fails.
 
-### 10. Report honestly
+For selective runtime/UX work, mutation-test the actual claimed tier: break RETAIN/state idempotence, force inactive context, leak private knowledge, remove institution permission, or expose hidden information in a decision trace and require the relevant test to fail. Prefer actual assembled SillyTavern context; if only a projection/simulator is available, report measurement method, fidelity, known differences, what the number proves, and what it cannot prove.
+
+### 11. Report honestly
 
 Lead with status and boundaries. Include preserved canon, exact counts/distributions, context engineering, files, migrations, tests, long-term results, known limitations, and next work. Distinguish automated validation, faithful package simulation, generated playtest transcripts, and actual human long-session play.
+
+Report Tier A, Tier B, Tier C, content-only, Skill-only, and no-project-change outcomes separately when the distinction matters.
 
 Use `World Alpha` or `Release Candidate`; never call an automated build `Final` before the relevant independent/human experiential gates.
 
