@@ -30,6 +30,28 @@ Every selected change should be explainable as:
 
 If that chain is unclear, do not keep the change.
 
+## Architecture gap is not implementation authorization
+
+For a mature ST-first package, a cleaner architecture is not itself a gap.
+
+Before adding a new state layer, router, compiler, database, actor store, event processor, external helper, or authority owner, require a reproducible failure in at least one of:
+
+- player experience;
+- state correctness;
+- knowledge/privacy boundaries;
+- save/reload;
+- context/retrieval;
+- deterministic behavior the package explicitly promises;
+- current SillyTavern playability.
+
+Use:
+
+`ACTUAL FAILURE → EXISTING OWNER CANNOT CLEANLY SOLVE IT → SMALLEST DELTA → PLAYER/CORRECTNESS RETURN → TEST`
+
+If that chain cannot be demonstrated, prefer `NO_CHANGE_NEEDED`, `DEFER`, or a clearly labeled Tier C prototype.
+
+External-card research may broaden the option space. It does not authorize implementation by itself.
+
 ## Product / harness evidence boundary
 
 A SillyTavern-first project may contain an external JS/Python harness, schemas, deterministic simulators or validators **without making those tools part of the playable product**. This is valid when the boundary is explicit.
@@ -39,6 +61,17 @@ Classify evidence separately:
 - **Tier A product evidence** — the authoritative Character Card / GM spec / World Info / registries actually imported or used by SillyTavern, plus player-facing regression evidence.
 - **Tier B enhancement evidence** — optional STscript / Quick Replies / selective World Info or similar artifacts that a player may enable, with extension-off fallback.
 - **Tier C validation-harness evidence** — external scripts, schemas, replay/simulation prototypes, validators and test fixtures used to check invariants or future-runtime ideas.
+
+For selective audits it is useful to classify candidate outcomes more precisely as:
+
+```text
+TIER_A_CANONICAL_ST
+TIER_B_OPTIONAL_ST
+TIER_C_VALIDATION_OR_FUTURE_RUNTIME
+CONTENT_ONLY
+SKILL_ONLY
+NO_PROJECT_CHANGE
+```
 
 A Tier C harness may prove schema validity, stable IDs, deterministic materialization, idempotency, migration behavior or other properties it genuinely exercises. It does **not** by itself prove that SillyTavern players experience those behaviors.
 
@@ -54,11 +87,14 @@ Reject as behavioral proof:
 - tests that only assert a fixture value they just assigned;
 - mocks that bypass the authority/retrieval/state transition being claimed;
 - a synthetic projection that is not linked to the actual ST package while being presented as measured ST context;
+- self-grading generated transcripts;
 - report prose that has no inspectable artifact/test behind it.
 
 Such placeholders may remain during development, but they must be labeled `SCAFFOLD / NOT VERIFIED` and excluded from PASS counts.
 
 For player-facing claims such as mundane 20-turn play, recurring-NPC continuity, anti-protagonist behavior, knowledge firewall, long absence, social access or long-session stability, require either a real ST-facing scenario test or a faithful package-level simulation that exercises the same prompt/lore/state path. Human playtest remains a separate higher evidence tier.
+
+For high-risk deltas, prefer mutation evidence: deliberately break the claimed behavior and require the corresponding test to fail.
 
 ### Baseline integrity evidence
 
@@ -99,6 +135,47 @@ Do not use it as a second giant world database, a one-agent-per-NPC simulator, o
 
 UI extensions, Server Plugins, external databases, runtime bridges and custom clients may later improve exactness. Do not make them mandatory unless the user explicitly requests that deployment target or the existing project already declares them as required.
 
+## Incremental state and derived-view discipline
+
+When the package or an attached runtime owns mutable durable state, omission from current narration or a partial update must not imply deletion.
+
+Useful semantics include:
+
+- `RETAIN` — unchanged durable fact remains;
+- `UPDATE/SET` — explicit replacement;
+- `ADD/REMOVE` — explicit collection change;
+- `INCREMENT/DECREMENT` — explicit bounded numeric change when valid;
+- `DELETE` — explicit valid removal;
+- `PURGE` — authorized cleanup of invalid/transient data;
+- `ROUTE/MOVE` — send a change to the correct owner instead of mutating the wrong record.
+
+Prefer existing owner semantics. Do not add a separate patch engine merely to obtain these names.
+
+Where applicable, test idempotent retry, duplicate protection, stable IDs, wrong-owner rejection/routing, and save/reload equivalence.
+
+Leaving a scene should lower presentation resolution rather than erase a persistent actor: scene pose/action may disappear while durable identity, condition, inventory/property, location, goals, obligations, relationships and knowledge remain with the current actor/state owner.
+
+Chronicles, summaries and memory views are derived projections of authoritative Event History. They may organize `ACTION → REACTION → RESULT` and expose selected source event IDs, time ranges, actors, locations, open threads and knowledge scope, but they must not invent facts or become a second Canon owner. Removing a derived view must change no world truth.
+
+## Reveal lifecycle
+
+Repeated exposition is both a playability and context problem.
+
+When the existing knowledge/memory owner can support it, distinguish:
+
+```text
+UNKNOWN
+FIRST_REVEAL
+KNOWN
+RECALL_WHEN_RELEVANT
+```
+
+Do not re-explain the same basic location, organization rule, public fact, or domain mechanic on every revisit.
+
+Recall remains appropriate when the player asks, after long absence, when memory is uncertain, when the decision requires the rule, or when the player only learned a partial version earlier.
+
+Do not create a second exposition tracker if the current knowledge/memory state can express the lifecycle.
+
 ## SillyTavern World Info rules
 
 Use World Info for durable/public/static or slow-changing facets and compact projection, not as a shadow mutable-state database.
@@ -127,6 +204,14 @@ Reject or mutation-test:
 
 Vector/embedding retrieval is optional recall support. It must not own secrets, alive/dead state, current location, ownership, access permission, relationship truth or other critical Canon.
 
+When raw keyword matching is insufficient, prefer eligibility from current state and player knowledge before selective facets are injected:
+
+`AUTHORITATIVE STATE + PLAYER KNOWLEDGE + SCENE → ELIGIBILITY → SELECTIVE FACETS / WORLD INFO → MODEL`
+
+Useful gates include location, active actor IDs, organization/membership, identity/role, player knowledge, active/relevant event, and committed world phase.
+
+Tune the current retrieval owner first. A new router is justified only by measured leakage or retrieval failure such as distant actors loading in unrelated scenes, private facts loading without eligibility, region changes failing to change context, generic-key collisions, or inactive content growing active prompt size.
+
 ## Token-neutrality rule
 
 Do not solve lived-world depth by increasing the global World Info/context budget. Measure the actual assembled prompt/context against the working baseline.
@@ -143,7 +228,51 @@ These are default engineering guardrails, not universal quotas. A project's stri
 
 A capability irrelevant to the current scene should contribute zero or near-zero prompt content. When a new selective facet adds value, remove or compact redundant old prose where safe instead of stacking both.
 
-For a claim of measured ST context, prefer the actual assembled ST prompt/context or an explicitly documented faithful assembler using the real card/World Info activation rules. A synthetic JSON projection is useful engineering evidence but must not be labeled actual ST context unless equivalence is demonstrated.
+For a claim of measured ST context, prefer the actual assembled ST prompt/context or an explicitly documented faithful assembler using the real card/World Info activation rules.
+
+If a custom projection, simulator, synthetic tokenizer or external harness is used, report:
+
+```text
+MEASUREMENT_METHOD
+FIDELITY_TO_REAL_ST
+KNOWN_DIFFERENCES
+WHAT_THE_NUMBER_CAN_PROVE
+WHAT_IT_CANNOT_PROVE
+```
+
+A synthetic projection is useful engineering evidence but must not be labeled exact ST context unless equivalence is demonstrated.
+
+Before/after comparisons should keep the same user input, character, World Info configuration, recursion/depth, retrieval settings, scene state and tokenizer/method.
+
+## Diegetic query and decision-trace boundary
+
+A world-native query surface is useful only when it answers a real player problem through a real authorized source.
+
+Examples include a player-known travel/history journal, public organization registry, market-information sheet, collected rumor book, or player-filtered Chronicle view.
+
+For a pilot define:
+
+```text
+in-world source
+owner
+access
+freshness
+query fields
+knowledge scope
+provenance
+render form
+delivery tier
+```
+
+Hard rule:
+
+`DIEGETIC UI != OMNISCIENCE`
+
+Do not expose NPC-only memory, secret identity, private plans, hidden goals, or facts with no valid player information path.
+
+A structured decision trace may explain a validated result using player-entitled facts, for example known access requirement, current known status and known alternate route. It must never expose hidden chain-of-thought or unknown premises.
+
+Presentation remains presentation. A title card, hero card, journal, decision trace, memory view or renderer profile may not mutate or outrank world truth.
 
 ## Lived-world capability mapping for ST
 
@@ -195,7 +324,11 @@ At minimum verify, as applicable to the selected gaps and existing baseline:
 13. chat reload/branch safety for any STscript variables;
 14. extension-off fallback if Tier B artifacts exist;
 15. baseline-vs-final assembled-context comparison;
-16. inactive-world scale stress proving context does not grow with irrelevant world size.
+16. inactive-world scale stress proving context does not grow with irrelevant world size;
+17. partial-state omission does not delete durable facts when mutable state is in scope;
+18. Chronicle/memory view contains only source-backed, player-entitled history and can be removed without changing Canon;
+19. reveal lifecycle reduces repeated exposition without suppressing necessary recall;
+20. diegetic queries/decision traces cannot reveal private unknown truth.
 
 A capability classified `KEEP_EXISTING` may pass its test with zero implementation change. That is a successful result, not missing work.
 
@@ -209,6 +342,8 @@ State explicitly which behaviors are:
 - enhanced by optional STscript/Quick Replies;
 - approximate through LLM/GM behavior;
 - supported only by Tier C validation/future-runtime prototypes;
+- content-only projections using existing owners;
+- Skill-only lessons with no project delta;
 - deferred to optional extension/runtime work.
 
 Do not call approximate SillyTavern behavior a deterministic external-world simulation. Do not upgrade placeholder tests into evidence merely because the test command exits green.
